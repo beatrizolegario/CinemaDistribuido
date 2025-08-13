@@ -10,6 +10,18 @@ set CP_ZK=.;%ZK_DIR%\lib\zookeeper-3.9.3.jar;%ZK_DIR%\lib\zookeeper-jute-3.9.3.j
 REM Adiciona o diretório do seu código fonte ao classpath para que o javac o encontre
 set CLASSPATH=%CP_ZK%;%PROJECT_DIR%
 
+REM ------------------- INÍCIO DAS MODIFICAÇÕES -------------------
+
+REM Inicia o servidor ZooKeeper em uma nova janela de console.
+echo Iniciando o servidor ZooKeeper em uma nova janela...
+START "ZooKeeper Server" %ZK_DIR%\bin\zkServer.cmd
+
+REM Adiciona uma pausa para dar tempo ao servidor de inicializar.
+echo Aguardando 10 segundos para o servidor ZooKeeper iniciar...
+TIMEOUT /T 10 /NOBREAK
+
+REM -------------------- FIM DAS MODIFICAÇÕES ---------------------
+
 echo Compilando CinemaTicketingSystem.java...
 javac -cp "%CLASSPATH%" %PROJECT_DIR%\CinemaTicketingSystem.java
 
